@@ -1,38 +1,43 @@
 package app.flashcards;
 
-import android.util.JsonReader;
+import android.content.Context;
+import android.content.res.AssetManager;
+import android.widget.TextView;
 
 import org.json.*;
 
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.InputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class CharacterList {
-    private String dataFilePath = "appdata/";
-    private String characterDataFileName;
-    private String characterStatusFileName;
+    private Context mcontext;
     protected ArrayList<Character> chlist;
 
-    public CharacterList(String datafn, String statusfn){
-        characterDataFileName = dataFilePath + datafn;
-        characterStatusFileName = dataFilePath + statusfn;
+    public CharacterList(Context c){
+        mcontext = c;
         chlist = new ArrayList<Character>();
         //read in the data
+        //readData();
     }
 
-    public void readData(){
+    public String readData(){
+        AssetManager am = mcontext.getAssets();
+        String s = null;
         try {
-            JsonReader jsr = new JsonReader(new FileReader(new File(characterDataFileName)));
-            System.out.print(jsr.toString());
+            BufferedReader br = new BufferedReader(new InputStreamReader(am.open("ch.json")));
+            while(!br.ready());
+            s= br.toString();
+            //JSONTokener jst = new JSONTokener(br.toString());
         } catch (FileNotFoundException e) {
             e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+        return s;
     }
 
 }
