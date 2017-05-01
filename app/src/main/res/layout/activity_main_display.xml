@@ -10,9 +10,9 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="app.flashcards.MainDisplay">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <ListView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        android:id="@+id/tv"/>
+        android:id="@+id/characterLV">
+    </ListView>
 </RelativeLayout>

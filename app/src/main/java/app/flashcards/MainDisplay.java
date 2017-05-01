@@ -11,7 +11,5 @@ public class MainDisplay extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_display);
         CharacterList cl = new CharacterList(this);
-        TextView tv = (TextView) findViewById(R.id.tv);
-        tv.setText(cl.getChlist().get(1).toString());
     }
 }
