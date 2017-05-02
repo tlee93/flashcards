@@ -2,10 +2,7 @@ package app.flashcards;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.ListViewCompat;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
 
 public class MainDisplay extends AppCompatActivity {
     //load json data. display as list
