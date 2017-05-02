@@ -34,13 +34,13 @@ public class CharacterList {
                 sb.append('\n');
             }
             br.close();
-            JSONArray jsa = new JSONObject(sb.toString()).getJSONArray("list");
+            JSONArray jsa = new JSONObject(sb.toString()).getJSONArray("l");
             int size = jsa.length();
             br = new BufferedReader(new InputStreamReader(am.open("statuslist.dat")));
             for(int i = 0; i < size; i++){
                 JSONObject current = jsa.getJSONObject(i);
-                String ch = current.getString("character");
-                JSONArray definitions = current.getJSONArray("definitions");
+                String ch = current.getString("c");
+                JSONArray definitions = current.getJSONArray("d");
                 List<String> list = new ArrayList<>();
                 for (int j = 0; j < definitions.length(); j++) {
                     list.add( definitions.getString(j) );
