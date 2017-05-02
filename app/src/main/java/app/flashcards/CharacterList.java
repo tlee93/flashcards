@@ -12,12 +12,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CharacterList {
-    protected List<Character> chlist;
-    String a = null;
+    protected ArrayList<Character> characterList;
     private Context mcontext;
 
     public CharacterList(Context c){
-        chlist = new ArrayList<Character>();
+        characterList = new ArrayList<>();
         mcontext = c;
         //read in the data
         readData();
@@ -42,11 +41,11 @@ public class CharacterList {
                 JSONObject current = jsa.getJSONObject(i);
                 String ch = current.getString("character");
                 JSONArray definitions = current.getJSONArray("definitions");
-                List<String> list = new ArrayList<String>();
+                List<String> list = new ArrayList<>();
                 for (int j = 0; j < definitions.length(); j++) {
                     list.add( definitions.getString(j) );
                 }
-                chlist.add(new Character(i+1, ch, list, Integer.parseInt(br.readLine())));
+                characterList.add(new Character(i+1, ch, list, Integer.parseInt(br.readLine())));
             }
             br.close();
 
@@ -55,7 +54,7 @@ public class CharacterList {
         }
     }
 
-    public List<Character> getChlist(){
-        return chlist;
+    public ArrayList<Character> getCharacterList(){
+        return characterList;
     }
 }

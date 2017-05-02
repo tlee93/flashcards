@@ -4,7 +4,7 @@
     android:layout_height="70dp"
     android:padding="10sp">
     <TextView
-        android:id="@+id/characterNumTV"
+        android:id="@+id/characterNumberTextView"
         android:layout_width="50sp"
         android:layout_height="50sp"
         android:layout_alignParentBottom="true"
@@ -13,17 +13,18 @@
         android:gravity="center"
         android:textSize="20sp"/>
     <TextView
-        android:id="@+id/characterTV"
+        android:id="@+id/characterTextView"
         android:layout_width="250sp"
         android:layout_height="50sp"
         android:layout_marginRight="8dip"
         android:textSize="20sp"
         android:gravity="center"
-        android:layout_toRightOf="@id/characterNumTV"/>
+        android:layout_toRightOf="@id/characterNumberTextView"/>
     <CheckBox
         android:layout_width="fill_parent"
+        android:id="@+id/seenCheckBox"
         android:layout_height="50sp"
         android:gravity="center"
         android:enabled="false"
-        android:layout_toRightOf="@id/characterTV"/>
+        android:layout_toRightOf="@id/characterTextView"/>
 </RelativeLayout>
