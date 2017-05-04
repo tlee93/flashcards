@@ -28,12 +28,7 @@ public class CharacterListAdapter extends ArrayAdapter<Character>{
         characterNumberTextView.setText(String.valueOf(character.getNumber()));
         characterTextView.setText(character.getCharacter());
         seenCheckBox.setChecked((character.getStatus() == 1 ? true : false));
-        convertView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //open new activity
-            }
-        });
+        convertView.setOnClickListener(new ItemOnClickListener(getContext(), position));
         return convertView;
     }
 }

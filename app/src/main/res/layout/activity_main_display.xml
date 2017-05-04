@@ -4,7 +4,7 @@
     android:id="@+id/activity_main_display"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="app.flashcards.MainDisplay">
+    tools:context="app.flashcards.MainDisplayActivity">
 
     <ListView
         android:layout_width="match_parent"

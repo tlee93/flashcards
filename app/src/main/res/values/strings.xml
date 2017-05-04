@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Flashcards</string>
+    <string name="loading_message">Loading</string>
+    <string name="title_activity_loading_screen">LoadingScreenActivity</string>
 </resources>
