@@ -5,10 +5,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import java.util.ArrayList;
+
 public class ItemOnClickListener implements View.OnClickListener{
     int position;
     Context context;
-    public ItemOnClickListener(Context c, int p){
+    public ItemOnClickListener(Context c, int p, ArrayList<Character> chlist){
         context = c;
         position = p;
     }

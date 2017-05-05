@@ -11,8 +11,10 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 public class CharacterListAdapter extends ArrayAdapter<Character>{
+    protected ArrayList<Character> characterList;
     public CharacterListAdapter(Context context, ArrayList<Character> chlist) {
         super(context, 0, chlist);
+        characterList = chlist;
     }
 
     @Override
@@ -28,7 +30,7 @@ public class CharacterListAdapter extends ArrayAdapter<Character>{
         characterNumberTextView.setText(String.valueOf(character.getNumber()));
         characterTextView.setText(character.getCharacter());
         seenCheckBox.setChecked((character.getStatus() == 1 ? true : false));
-        convertView.setOnClickListener(new ItemOnClickListener(getContext(), position));
+        convertView.setOnClickListener(new ItemOnClickListener(getContext(), position, characterList));
         return convertView;
     }
 }

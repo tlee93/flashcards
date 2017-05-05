@@ -13,20 +13,17 @@ import java.util.List;
 
 public class CharacterList {
     protected ArrayList<Character> characterList;
-    private Context mcontext;
-
-    public CharacterList(Context c){
+    public CharacterList(){
         characterList = new ArrayList<>();
-        mcontext = c;
         //read in the data
         readData();
     }
 
     public void readData() {
-        AssetManager am = mcontext.getAssets();
+
+        AssetManager am = new GlobalApplicationContext().getContext().getAssets();
         StringBuilder sb = new StringBuilder();
         try {
-            File f = new File("ch.json");
             BufferedReader br = new BufferedReader(new InputStreamReader(am.open("ch.json")));
             String line;
             while ((line = br.readLine()) != null){
@@ -34,13 +31,13 @@ public class CharacterList {
                 sb.append('\n');
             }
             br.close();
-            JSONArray jsa = new JSONObject(sb.toString()).getJSONArray("l");
+            JSONArray jsa = new JSONObject(sb.toString()).getJSONArray("l"); //start of the list
             int size = jsa.length();
             br = new BufferedReader(new InputStreamReader(am.open("statuslist.dat")));
             for(int i = 0; i < size; i++){
                 JSONObject current = jsa.getJSONObject(i);
-                String ch = current.getString("c");
-                JSONArray definitions = current.getJSONArray("d");
+                String ch = current.getString("c"); //get chara
+                JSONArray definitions = current.getJSONArray("d"); //get definitions
                 List<String> list = new ArrayList<>();
                 for (int j = 0; j < definitions.length(); j++) {
                     list.add( definitions.getString(j) );
@@ -48,7 +45,6 @@ public class CharacterList {
                 characterList.add(new Character(i+1, ch, list, Integer.parseInt(br.readLine())));
             }
             br.close();
-
         } catch (Exception e) {
             e.printStackTrace();
         }

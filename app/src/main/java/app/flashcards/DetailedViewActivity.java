@@ -8,6 +8,9 @@ public class DetailedViewActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        android.app.ActionBar actionBar = getActionBar();
+        if(actionBar != null) actionBar.hide();
+
         Bundle b = getIntent().getExtras();
         int position = 0;
         if(b != null)
