@@ -2,13 +2,13 @@ package app.flashcards;
 
 import java.util.List;
 
-public class Character {
+public class Character{
     private int number;
     private String character;
     private List<String> definitions;
-    private int status; //viewed or unviewed
+    private boolean status; //viewed (true) or unviewed (false)
 
-    public Character(int n, String c, List<String> d, int s){
+    public Character(int n, String c, List<String> d, boolean s){
         number = n;
         character = c;
         definitions = d;
@@ -27,11 +27,11 @@ public class Character {
         return definitions;
     }
 
-    public int getStatus(){
+    public boolean getStatus(){
         return status;
     }
 
-    public String toString(){
-        return number + " " + character + " " + definitions.get(0) + " " + status;
+    public void setStatus(boolean s){
+        status = s;
     }
 }

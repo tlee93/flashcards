@@ -29,7 +29,7 @@ public class CharacterListAdapter extends ArrayAdapter<Character>{
 
         characterNumberTextView.setText(String.valueOf(character.getNumber()));
         characterTextView.setText(character.getCharacter());
-        seenCheckBox.setChecked((character.getStatus() == 1 ? true : false));
+        seenCheckBox.setChecked((character.getStatus()));
         convertView.setOnClickListener(new ItemOnClickListener(getContext(), position, characterList));
         return convertView;
     }

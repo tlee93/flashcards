@@ -1,19 +1,18 @@
 package app.flashcards;
 
-import android.content.Context;
 import android.content.res.AssetManager;
 
 import org.json.*;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
 public class CharacterList {
-    protected ArrayList<Character> characterList;
-    public CharacterList(){
+    private static CharacterList characterListInstance = new CharacterList();
+    private ArrayList<Character> characterList;
+    private CharacterList(){
         characterList = new ArrayList<>();
         //read in the data
         readData();
@@ -39,10 +38,9 @@ public class CharacterList {
                 String ch = current.getString("c"); //get chara
                 JSONArray definitions = current.getJSONArray("d"); //get definitions
                 List<String> list = new ArrayList<>();
-                for (int j = 0; j < definitions.length(); j++) {
+                for (int j = 0; j < definitions.length(); j++)
                     list.add( definitions.getString(j) );
-                }
-                characterList.add(new Character(i+1, ch, list, Integer.parseInt(br.readLine())));
+                characterList.add(new Character(i+1, ch, list, Integer.parseInt(br.readLine()) != 0));
             }
             br.close();
         } catch (Exception e) {
@@ -50,7 +48,7 @@ public class CharacterList {
         }
     }
 
-    public ArrayList<Character> getCharacterList(){
-        return characterList;
+    public static ArrayList<Character> getCharacterList(){
+        return characterListInstance.characterList;
     }
 }
