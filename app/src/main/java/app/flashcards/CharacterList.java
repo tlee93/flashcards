@@ -9,9 +9,11 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
+//singleton for global data access
 public class CharacterList {
     private static CharacterList characterListInstance = new CharacterList();
     private ArrayList<Character> characterList;
+
     private CharacterList(){
         characterList = new ArrayList<>();
         //read in the data

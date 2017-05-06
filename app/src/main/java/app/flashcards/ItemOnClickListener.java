@@ -7,9 +7,10 @@ import android.view.View;
 
 import java.util.ArrayList;
 
+//this handler is used to switch from list view to detailed view
 public class ItemOnClickListener implements View.OnClickListener{
-    int position;
-    Context context;
+    private int position;
+    protected Context context;
     ArrayList<Character> characterList;
     public ItemOnClickListener(Context c, int p, ArrayList<Character> chlist){
         context = c;

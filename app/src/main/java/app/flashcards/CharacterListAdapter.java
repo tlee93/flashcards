@@ -20,9 +20,9 @@ public class CharacterListAdapter extends ArrayAdapter<Character>{
     @Override
     public View getView(int position, View convertView, ViewGroup parent){
         Character character = getItem(position);
-        if (convertView == null) {
+        if (convertView == null)
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.list_entry_layout, parent, false);
-        }
+
         TextView characterNumberTextView = (TextView) convertView.findViewById(R.id.characterNumberTextView);
         TextView characterTextView = (TextView) convertView.findViewById(R.id.characterTextView);
         CheckBox seenCheckBox = (CheckBox) convertView.findViewById(R.id.seenCheckBox);

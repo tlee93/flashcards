@@ -3,6 +3,7 @@ package app.flashcards;
 import android.app.Application;
 import android.content.Context;
 
+//this class allows the application context to be accessed from anywhere
 public class GlobalApplicationContext extends Application{
     private static GlobalApplicationContext context;
 
