@@ -40,6 +40,11 @@ public class ScreenSlideFragment extends Fragment {
         return view;
     }
 
+    private String formatDefinitionString(String s){
+        // TODO
+        return s;
+    }
+
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
