@@ -2,32 +2,32 @@ package app.flashcards;
 
 import java.util.List;
 
-public class Character{
+class Character{
     private int number;
     private String character;
     private List<String> definitions;
     private boolean status; //viewed (true) or unviewed (false)
 
-    public Character(int n, String c, List<String> d, boolean s){
+    Character(int n, String c, List<String> d, boolean s){
         number = n;
         character = c;
         definitions = d;
         status = s;
     }
 
-    public int getNumber(){
+    int getNumber(){
         return number;
     }
 
-    public String getCharacter(){
+    String getCharacter(){
         return character;
     }
 
-    public List<String> getDefinitions(){
+    List<String> getDefinitions(){
         return definitions;
     }
 
-    public boolean getStatus(){
+    boolean getStatus(){
         return status;
     }
 

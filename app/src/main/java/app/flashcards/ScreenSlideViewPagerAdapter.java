@@ -6,9 +6,9 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
-public class ScreenSlideViewPagerAdapter extends FragmentStatePagerAdapter {
+class ScreenSlideViewPagerAdapter extends FragmentStatePagerAdapter {
     private int count;
-    public ScreenSlideViewPagerAdapter(FragmentManager fm) {
+    ScreenSlideViewPagerAdapter(FragmentManager fm) {
         super(fm);
         count = CharacterList.getCharacterList().size();
     }

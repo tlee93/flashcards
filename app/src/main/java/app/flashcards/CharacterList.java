@@ -10,18 +10,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 //singleton for global data access
-public class CharacterList {
+class CharacterList {
     private static CharacterList characterListInstance = new CharacterList();
     private ArrayList<Character> characterList;
 
     private CharacterList(){
-        characterList = new ArrayList<>();
-        //read in the data
-        readData();
-    }
-
-    public void readData() {
-
         AssetManager am = new GlobalApplicationContext().getContext().getAssets();
         StringBuilder sb = new StringBuilder();
         try {
@@ -34,6 +27,7 @@ public class CharacterList {
             br.close();
             JSONArray jsa = new JSONObject(sb.toString()).getJSONArray("l"); //start of the list
             int size = jsa.length();
+            characterList = new ArrayList<>(size);
             br = new BufferedReader(new InputStreamReader(am.open("statuslist.dat")));
             for(int i = 0; i < size; i++){
                 JSONObject current = jsa.getJSONObject(i);
@@ -50,7 +44,7 @@ public class CharacterList {
         }
     }
 
-    public static ArrayList<Character> getCharacterList(){
+    static ArrayList<Character> getCharacterList(){
         return characterListInstance.characterList;
     }
 }

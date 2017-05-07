@@ -1,7 +1,6 @@
 package app.flashcards;
 
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -9,14 +8,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.util.List;
+
 public class ScreenSlideFragment extends Fragment {
-    private OnFragmentInteractionListener mListener;
     private int position;
     private Character character;
 
-    public ScreenSlideFragment() {
-        // Required empty public constructor
-    }
+    // Required empty public constructor
+    public ScreenSlideFragment() {}
 
     @Override
     public void onCreate (Bundle savedInstanceState){
@@ -36,51 +35,24 @@ public class ScreenSlideFragment extends Fragment {
 
         detailedNumberTextView.setText(String.valueOf(character.getNumber()));
         detailedCharacterTextView.setText(character.getCharacter());
-        detailedDefinitionsTextView.setText(character.getDefinitions().toString());
+        detailedDefinitionsTextView.setText(formatDefinitionString(character.getDefinitions()));
         return view;
     }
 
-    private String formatDefinitionString(String s){
-        // TODO
-        return s;
-    }
-
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
+    private String formatDefinitionString(List<String> definitionList){
+        String def = "";
+        for(String s: definitionList)
+            def += (s + '\n');
+        return def;
     }
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-//        if (context instanceof OnFragmentInteractionListener) {
-//            mListener = (OnFragmentInteractionListener) context;
-//        } else {
-//            throw new RuntimeException(context.toString()
-//                    + " must implement OnFragmentInteractionListener");
-//        }
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
-        mListener = null;
-    }
-
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
     }
 }
