@@ -1,6 +1,7 @@
 package app.flashcards;
 
 import android.content.Context;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,27 +11,45 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class CharacterListAdapter extends ArrayAdapter<Character>{
+public class CharacterListAdapter extends RecyclerView.Adapter<CharacterListAdapter.ViewHolder>{
     protected ArrayList<Character> characterList;
-    public CharacterListAdapter(Context context, ArrayList<Character> chlist) {
-        super(context, 0, chlist);
+    private Context context;
+
+    public static class ViewHolder extends RecyclerView.ViewHolder {
+        protected TextView characterNumberTextView;
+        protected TextView characterTextView;
+        protected CheckBox seenCheckBox;
+        public ViewHolder(View v) {
+            super(v);
+            characterNumberTextView = (TextView) v.findViewById(R.id.characterNumberTextView);
+            characterTextView = (TextView) v.findViewById(R.id.characterTextView);
+            seenCheckBox = (CheckBox) v.findViewById(R.id.seenCheckBox);
+        }
+    }
+
+    public CharacterListAdapter(Context c, ArrayList<Character> chlist) {
         characterList = chlist;
+        context = c;
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent){
-        Character character = getItem(position);
-        if (convertView == null)
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.list_entry_layout, parent, false);
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_entry_layout, parent, false);
+        ViewHolder vh = new ViewHolder(v);
+        return vh;
+    }
 
-        TextView characterNumberTextView = (TextView) convertView.findViewById(R.id.characterNumberTextView);
-        TextView characterTextView = (TextView) convertView.findViewById(R.id.characterTextView);
-        CheckBox seenCheckBox = (CheckBox) convertView.findViewById(R.id.seenCheckBox);
+    @Override
+    public void onBindViewHolder(ViewHolder holder, int position) {
+        Character character = characterList.get(position);
+        holder.itemView.setOnClickListener(new ItemOnClickListener(context, position));
+        holder.characterNumberTextView.setText(String.valueOf(character.getNumber()));
+        holder.characterTextView.setText(character.getCharacter());
+        holder.seenCheckBox.setChecked((character.getStatus()));
+    }
 
-        characterNumberTextView.setText(String.valueOf(character.getNumber()));
-        characterTextView.setText(character.getCharacter());
-        seenCheckBox.setChecked((character.getStatus()));
-        convertView.setOnClickListener(new ItemOnClickListener(getContext(), position, characterList));
-        return convertView;
+    @Override
+    public int getItemCount() {
+        return characterList.size();
     }
 }

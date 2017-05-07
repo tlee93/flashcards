@@ -8,7 +8,6 @@ import java.util.ArrayList;
 
 public class DetailedViewActivity extends FragmentActivity {
     private int position;
-    protected ArrayList<Character> characterList;
     private ViewPager viewPager;
     private ScreenSlideViewPagerAdapter viewPagerAdapter;
 
@@ -17,7 +16,6 @@ public class DetailedViewActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detailed_view);
 
-//        characterList = CharacterList.getCharacterList();
         Bundle b = getIntent().getExtras();
         position = 0;
         if(b != null)
@@ -26,6 +24,7 @@ public class DetailedViewActivity extends FragmentActivity {
         viewPager = (ViewPager) findViewById(R.id.view_pager);
         viewPagerAdapter = new ScreenSlideViewPagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(viewPagerAdapter);
+        viewPager.setPageTransformer(true, new DepthPageTransformer());
         viewPager.setCurrentItem(position);
     }
 

@@ -10,12 +10,11 @@ import java.util.ArrayList;
 //this handler is used to switch from list view to detailed view
 public class ItemOnClickListener implements View.OnClickListener{
     private int position;
-    protected Context context;
-    ArrayList<Character> characterList;
-    public ItemOnClickListener(Context c, int p, ArrayList<Character> chlist){
-        context = c;
+    private Context context;
+
+    public ItemOnClickListener(Context c, int p){
         position = p;
-        characterList = chlist;
+        context = c;
     }
 
     @Override

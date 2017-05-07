@@ -10,13 +10,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".LoadingScreenActivity">
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:theme="@style/FullscreenTheme"
-        </activity>
-
-        <activity android:name=".MainDisplayActivity">
-            android:screenOrientation="portrait"
+        <activity android:name=".MainDisplayActivity"
+            android:screenOrientation="portrait">
             android:configChanges="orientation|keyboardHidden"
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,8 +19,8 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".DetailedViewActivity" >
-            android:screenOrientation="portrait"
+        <activity android:name=".DetailedViewActivity"
+            android:screenOrientation="portrait">
             android:configChanges="orientation|keyboardHidden"
         </activity>
     </application>
