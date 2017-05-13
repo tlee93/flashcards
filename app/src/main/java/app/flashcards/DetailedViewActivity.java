@@ -1,5 +1,6 @@
 package app.flashcards;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
@@ -29,5 +30,9 @@ public class DetailedViewActivity extends FragmentActivity {
     @Override
     public void onBackPressed(){
         super.onBackPressed();
+        //activity will finish. save position
+        SharedPreferences.Editor editor = getSharedPreferences("currentPosition", MODE_PRIVATE).edit();
+        editor.putInt("position", viewPager.getCurrentItem());
+        editor.apply();
     }
 }

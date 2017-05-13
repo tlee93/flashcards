@@ -1,23 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:id="@+id/menu_item_share"
-        android:icon="@android:drawable/ic_menu_share"
-        android:actionProviderClass="android.widget.ShareActionProvider" />
+<android.support.v7.view.menu.ActionMenuItemView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="10dp"
+    android:layout_width="10dp">
 
-    <item
-        android:id="@+id/empty"
-        android:title="@string/options"
-        android:orderInCategory="101"
-        android:icon="@drawable/ic_action_overflow">
 
-        <menu>
-
-            <item android:id="@+id/action_settings"
-                android:icon="@android:drawable/ic_menu_preferences"
-                android:title="@string/settings" />
-
-        </menu>
-
-    </item>
-
-</menu>
+</android.support.v7.view.menu.ActionMenuItemView>
