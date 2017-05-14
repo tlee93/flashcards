@@ -2,4 +2,7 @@
     <string name="app_name">Flashcards</string>
     <string name="loading_message">Loading...</string>
     <string name="title_activity_loading_screen">Loading Sccreen</string>
+    <string name="help_icon_title">Help</string>
+    <string name="info_icon_title">Info</string>
+    <string name="info_reset_title">Clear</string>
 </resources>

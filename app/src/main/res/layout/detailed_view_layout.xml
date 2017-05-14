@@ -36,4 +36,14 @@
         android:layout_marginTop="40dp"
         android:layout_below="@+id/detailedCharacterTextView" />
 
+    <ImageView
+        android:id="@+id/detailedPlaySoundImageView"
+        android:src="@drawable/ic_play"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="20dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true" />
+
 </RelativeLayout>

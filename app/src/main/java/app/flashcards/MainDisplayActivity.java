@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import java.util.ArrayList;
 
@@ -22,6 +24,7 @@ public class MainDisplayActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main_display);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
         recyclerView = (RecyclerView) findViewById(R.id.characterRecycleListView);
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this);
@@ -41,6 +44,25 @@ public class MainDisplayActivity extends AppCompatActivity {
     private int getPosition(){
         SharedPreferences sharedPreferences = getSharedPreferences("currentPosition", MODE_PRIVATE);
         return sharedPreferences.getInt("position", 0);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        getMenuInflater().inflate(R.menu.items, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_help:
+                return true;
+            case R.id.action_info:
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+
+        }
     }
 
     private class MainDisplayScrollListener extends RecyclerView.OnScrollListener {

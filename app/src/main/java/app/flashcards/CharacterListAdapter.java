@@ -42,7 +42,8 @@ class CharacterListAdapter extends RecyclerView.Adapter<CharacterListAdapter.Vie
         Character character = characterList.get(position);
         holder.itemView.setOnClickListener(new ItemOnClickListener(context, position));
         holder.characterNumberTextView.setText(String.valueOf(character.getNumber()));
-        holder.characterTextView.setText(character.getCharacter());
+        String s = character.getCharacter().charAt(0) + "";
+        holder.characterTextView.setText(s);
         holder.seenCheckBox.setChecked((character.getStatus()));
     }
 

@@ -2,11 +2,11 @@
 language vocabulary flashcards on android  
 
 # features
--list of words sorted by frequency  
--detailed view for words  
--supported languages: chinese  
+list of words sorted by frequency  
+detailed view for words  
+supported languages: chinese  
+add text-to-speech  
 
 # to do list
--add text-to-speech  
--add more languages  
--add vocab test feature  
+add more language support 
+add vocab test feature  
