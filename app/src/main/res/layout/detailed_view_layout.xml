@@ -38,7 +38,7 @@
 
     <ImageView
         android:id="@+id/detailedPlaySoundImageView"
-        android:src="@drawable/ic_play"
+        android:src="@drawable/ic_play_circle_outline_black_36dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="20dp"
