@@ -1,0 +1,8 @@
+body       {background-color: #ffffdd;}
+
+a:link     {text-decoration: none; color: red;}
+a:visited  {text-decoration: none; color: brown;}
+a:hover    {text-decoration: underline;}
+.highlight {background-color: abe4a4; color: darkgreen;}
+
+P, TD, LI, H1, H2, H3, H4, H5, H6 {color: black; font-family: arial unicode,arial;}
