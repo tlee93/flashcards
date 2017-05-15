@@ -10,11 +10,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 //singleton for global data access
-class CharacterList {
-    private static CharacterList characterListInstance = new CharacterList();
-    private ArrayList<Character> characterList;
+class WordList {
+    private static WordList wordListInstance = new WordList();
+    private ArrayList<Word> wordList;
 
-    private CharacterList(){
+    private WordList(){
         AssetManager am = new GlobalApplicationContext().getContext().getAssets();
         StringBuilder sb = new StringBuilder();
         try {
@@ -27,16 +27,16 @@ class CharacterList {
             br.close();
             JSONArray jsa = new JSONObject(sb.toString()).getJSONArray("l"); //start of the list
             int size = jsa.length();
-            characterList = new ArrayList<>(size);
+            wordList = new ArrayList<>(size);
             br = new BufferedReader(new InputStreamReader(am.open("statuslist.dat")));
             for(int i = 0; i < size; i++){
                 JSONObject current = jsa.getJSONObject(i);
-                String ch = current.getString("c"); //get chara
+                String ch = current.getString("c"); //get chara/word
                 JSONArray definitions = current.getJSONArray("d"); //get definitions
                 List<String> list = new ArrayList<>();
                 for (int j = 0; j < definitions.length(); j++)
                     list.add( definitions.getString(j) );
-                characterList.add(new Character(i+1, ch, list, Integer.parseInt(br.readLine()) != 0));
+                wordList.add(new Word(i+1, ch, list, Integer.parseInt(br.readLine()) != 0));
             }
             br.close();
         } catch (Exception e) {
@@ -44,7 +44,7 @@ class CharacterList {
         }
     }
 
-    static ArrayList<Character> getCharacterList(){
-        return characterListInstance.characterList;
+    static ArrayList<Word> getWordList(){
+        return wordListInstance.wordList;
     }
 }

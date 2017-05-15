@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Locale;
 
 public class ScreenSlideFragment extends Fragment {
-    private Character character;
+    private Word word;
     private TextToSpeech tts;
 
     // Required empty public constructor
@@ -25,7 +25,7 @@ public class ScreenSlideFragment extends Fragment {
     public void onCreate (Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         int position = getArguments().getInt("position");
-        character = CharacterList.getCharacterList().get(position);
+        word = WordList.getWordList().get(position);
         tts = new TextToSpeech(getContext(), new TextToSpeech.OnInitListener() {
             @Override
             public void onInit(int status) {
@@ -48,17 +48,17 @@ public class ScreenSlideFragment extends Fragment {
         ViewGroup view = (ViewGroup) inflater.inflate(R.layout.detailed_view_layout, container, false);
 
         TextView detailedNumberTextView = (TextView) view.findViewById(R.id.detailedNumberTextView);
-        TextView detailedCharacterTextView = (TextView) view.findViewById(R.id.detailedCharacterTextView);
+        TextView detailedCharacterTextView = (TextView) view.findViewById(R.id.detailedWordTextView);
         TextView detailedDefinitionsTextView = (TextView) view.findViewById(R.id.detailedDefinitionsTextView);
         final ImageView detailedPlaySoundImageView = (ImageView) view.findViewById(R.id.detailedPlaySoundImageView);
 
-        detailedNumberTextView.setText(String.valueOf(character.getNumber()));
-        detailedCharacterTextView.setText(character.getCharacter());
-        detailedDefinitionsTextView.setText(formatDefinitionString(character.getDefinitions()));
+        detailedNumberTextView.setText(String.valueOf(word.getNumber()));
+        detailedCharacterTextView.setText(word.getWord());
+        detailedDefinitionsTextView.setText(formatDefinitionString(word.getDefinitions()));
         detailedPlaySoundImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                playText();
+                speakText();
             }
         });
         return view;
@@ -70,8 +70,8 @@ public class ScreenSlideFragment extends Fragment {
         tts.shutdown();
     }
 
-    private void playText(){
-        String s = character.getCharacter().charAt(0) + "";
+    private void speakText(){
+        String s = word.getWord().charAt(0) + "";
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
             tts.speak(s, TextToSpeech.QUEUE_FLUSH, null, null);
         else

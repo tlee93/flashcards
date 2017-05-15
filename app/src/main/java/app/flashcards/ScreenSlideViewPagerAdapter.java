@@ -10,7 +10,7 @@ class ScreenSlideViewPagerAdapter extends FragmentStatePagerAdapter {
     private int count;
     ScreenSlideViewPagerAdapter(FragmentManager fm) {
         super(fm);
-        count = CharacterList.getCharacterList().size();
+        count = WordList.getWordList().size();
     }
 
     @Override

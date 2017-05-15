@@ -5,7 +5,7 @@
     android:padding="10dp"
     android:gravity="center_horizontal">
     <TextView
-        android:id="@+id/characterNumberTextView"
+        android:id="@+id/entryNumberTextView"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_alignParentBottom="true"
@@ -14,18 +14,18 @@
         android:gravity="center"
         android:textSize="20sp"/>
     <TextView
-        android:id="@+id/characterTextView"
+        android:id="@+id/entryWordTextView"
         android:layout_width="240dp"
         android:layout_height="50dp"
         android:layout_marginRight="10dp"
         android:textSize="30sp"
         android:gravity="center"
-        android:layout_toRightOf="@id/characterNumberTextView"/>
+        android:layout_toRightOf="@id/entryNumberTextView"/>
     <CheckBox
         android:layout_width="50dp"
         android:id="@+id/seenCheckBox"
         android:layout_height="50dp"
         android:gravity="center"
         android:enabled="false"
-        android:layout_toRightOf="@id/characterTextView"/>
+        android:layout_toRightOf="@id/entryWordTextView"/>
 </RelativeLayout>

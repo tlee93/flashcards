@@ -2,15 +2,15 @@ package app.flashcards;
 
 import java.util.List;
 
-class Character{
+class Word {
     private int number;
-    private String character;
+    private String word;
     private List<String> definitions;
     private boolean status; //viewed (true) or unviewed (false)
 
-    Character(int n, String c, List<String> d, boolean s){
+    Word(int n, String w, List<String> d, boolean s){
         number = n;
-        character = c;
+        word = w;
         definitions = d;
         status = s;
     }
@@ -19,8 +19,8 @@ class Character{
         return number;
     }
 
-    String getCharacter(){
-        return character;
+    String getWord(){
+        return word;
     }
 
     List<String> getDefinitions(){

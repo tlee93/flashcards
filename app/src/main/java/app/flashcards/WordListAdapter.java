@@ -10,8 +10,8 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-class CharacterListAdapter extends RecyclerView.Adapter<CharacterListAdapter.ViewHolder>{
-    private ArrayList<Character> characterList;
+class WordListAdapter extends RecyclerView.Adapter<WordListAdapter.ViewHolder>{
+    private ArrayList<Word> wordList;
     private Context context;
 
     static class ViewHolder extends RecyclerView.ViewHolder {
@@ -20,14 +20,14 @@ class CharacterListAdapter extends RecyclerView.Adapter<CharacterListAdapter.Vie
         CheckBox seenCheckBox;
         ViewHolder(View v) {
             super(v);
-            characterNumberTextView = (TextView) v.findViewById(R.id.characterNumberTextView);
-            characterTextView = (TextView) v.findViewById(R.id.characterTextView);
+            characterNumberTextView = (TextView) v.findViewById(R.id.entryNumberTextView);
+            characterTextView = (TextView) v.findViewById(R.id.entryWordTextView);
             seenCheckBox = (CheckBox) v.findViewById(R.id.seenCheckBox);
         }
     }
 
-    CharacterListAdapter(Context c, ArrayList<Character> chlist) {
-        characterList = chlist;
+    WordListAdapter(Context c, ArrayList<Word> chlist) {
+        wordList = chlist;
         context = c;
     }
 
@@ -39,16 +39,16 @@ class CharacterListAdapter extends RecyclerView.Adapter<CharacterListAdapter.Vie
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        Character character = characterList.get(position);
+        Word word = wordList.get(position);
         holder.itemView.setOnClickListener(new ItemOnClickListener(context, position));
-        holder.characterNumberTextView.setText(String.valueOf(character.getNumber()));
-        String s = character.getCharacter().charAt(0) + "";
+        holder.characterNumberTextView.setText(String.valueOf(word.getNumber()));
+        String s = word.getWord().charAt(0) + "";
         holder.characterTextView.setText(s);
-        holder.seenCheckBox.setChecked((character.getStatus()));
+        holder.seenCheckBox.setChecked((word.getStatus()));
     }
 
     @Override
     public int getItemCount() {
-        return characterList.size();
+        return wordList.size();
     }
 }

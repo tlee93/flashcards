@@ -16,22 +16,26 @@ public class MainDisplayActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private LinearLayoutManager layoutManager;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    private void initActivity(){
         setContentView(R.layout.activity_main_display);
 
-        ArrayList<Character> characterList = CharacterList.getCharacterList();
+        ArrayList<Word> wordList = WordList.getWordList();
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        recyclerView = (RecyclerView) findViewById(R.id.characterRecycleListView);
+        recyclerView = (RecyclerView) findViewById(R.id.wordRecycleListView);
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
-        CharacterListAdapter characterListAdapter = new CharacterListAdapter(this, characterList);
-        recyclerView.setAdapter(characterListAdapter);
+        WordListAdapter wordListAdapter = new WordListAdapter(this, wordList);
+        recyclerView.setAdapter(wordListAdapter);
         recyclerView.addOnScrollListener(new MainDisplayScrollListener());
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        initActivity();
     }
 
     @Override
@@ -58,7 +62,7 @@ public class MainDisplayActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(MenuItem item) { //TODO add more options
         AlertDialog.Builder alertDialogBuilder;
         AlertDialog alertDialog;
         switch (item.getItemId()) {
@@ -90,6 +94,4 @@ public class MainDisplayActivity extends AppCompatActivity {
             editor.commit();
         }
     }
-
-
 }
