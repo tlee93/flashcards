@@ -8,7 +8,8 @@ public class SplashScreenActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Intent intent = new Intent(this, MainDisplayActivity.class);
+        ApplicationResourceManager.setContext(getApplicationContext());
+        Intent intent = new Intent(this, FirstTimeUserInitActivity.class);
         startActivity(intent);
         finish();
     }

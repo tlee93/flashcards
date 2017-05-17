@@ -15,6 +15,6 @@
 
     <item
         android:id="@+id/action_reset"
-        android:title="@string/info_icon_title"
+        android:title="@string/info_reset_title"
         app:showAsAction="never"/>
 </menu>

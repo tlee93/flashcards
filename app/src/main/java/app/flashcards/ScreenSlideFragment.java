@@ -24,19 +24,18 @@ public class ScreenSlideFragment extends Fragment {
     @Override
     public void onCreate (Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        int position = getArguments().getInt("position");
+        int position = ApplicationResourceManager.getCurrentPosition();
         word = WordList.getWordList().get(position);
         tts = new TextToSpeech(getContext(), new TextToSpeech.OnInitListener() {
             @Override
             public void onInit(int status) {
                 if(status == TextToSpeech.SUCCESS){
                     //try to set locale
-                    int result = tts.setLanguage(Locale.CHINESE);
+                    int result = tts.setLanguage(ApplicationResourceManager.getLocale());
                     if(result != TextToSpeech.LANG_AVAILABLE)
                         Toast.makeText(getContext(), "Language is not supported.", Toast.LENGTH_LONG).show();
-
                 }
-                else
+                else //TODO better tts error handling
                     Toast.makeText(getContext(), "Error. Text-to-speech may be disabled.", Toast.LENGTH_LONG).show();
             }
         });
@@ -54,7 +53,7 @@ public class ScreenSlideFragment extends Fragment {
 
         detailedNumberTextView.setText(String.valueOf(word.getNumber()));
         detailedCharacterTextView.setText(word.getWord());
-        detailedDefinitionsTextView.setText(formatDefinitionString(word.getDefinitions()));
+        detailedDefinitionsTextView.setText(ApplicationResourceManager.formatDefinitionString(word.getDefinitions()));
         detailedPlaySoundImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -71,18 +70,11 @@ public class ScreenSlideFragment extends Fragment {
     }
 
     private void speakText(){
-        String s = word.getWord().charAt(0) + "";
+        String s = ApplicationResourceManager.formatWordDisplayString(word.getWord()); //TODO
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
             tts.speak(s, TextToSpeech.QUEUE_FLUSH, null, null);
         else
             tts.speak(s, TextToSpeech.QUEUE_FLUSH, null);
 
-    }
-
-    private String formatDefinitionString(List<String> definitionList){
-        String def = "";
-        for(String s: definitionList)
-            def += (s + '\n');
-        return def;
     }
 }

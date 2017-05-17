@@ -41,18 +41,13 @@ public class MainDisplayActivity extends AppCompatActivity {
     @Override
     protected void onStart(){
         super.onStart();
-        recyclerView.scrollToPosition(getPosition());
+        recyclerView.scrollToPosition(ApplicationResourceManager.getCurrentPosition());
     }
 
     @Override
     protected void onResume(){
         super.onResume();
-        recyclerView.scrollToPosition(getPosition());
-    }
-
-    private int getPosition(){
-        SharedPreferences sharedPreferences = getSharedPreferences("currentPosition", MODE_PRIVATE);
-        return sharedPreferences.getInt("position", 0);
+        recyclerView.scrollToPosition(ApplicationResourceManager.getCurrentPosition());
     }
 
     @Override
@@ -86,12 +81,10 @@ public class MainDisplayActivity extends AppCompatActivity {
     }
 
     private class MainDisplayScrollListener extends RecyclerView.OnScrollListener {
-        SharedPreferences.Editor editor = getSharedPreferences("currentPosition", MODE_PRIVATE).edit();
 
         @Override
         public void onScrolled(RecyclerView recyclerView, int dx, int dy){
-            editor.putInt("position", layoutManager.findFirstVisibleItemPosition());
-            editor.commit();
+            ApplicationResourceManager.setCurrentPosition(layoutManager.findFirstVisibleItemPosition());
         }
     }
 }

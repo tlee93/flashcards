@@ -1,6 +1,8 @@
 package app.flashcards;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -40,9 +42,9 @@ class WordListAdapter extends RecyclerView.Adapter<WordListAdapter.ViewHolder>{
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         Word word = wordList.get(position);
-        holder.itemView.setOnClickListener(new ItemOnClickListener(context, position));
+        holder.itemView.setOnClickListener(new ItemOnClickListener(position));
         holder.characterNumberTextView.setText(String.valueOf(word.getNumber()));
-        String s = word.getWord().charAt(0) + "";
+        String s = ApplicationResourceManager.formatWordDisplayString(word.getWord());
         holder.characterTextView.setText(s);
         holder.seenCheckBox.setChecked((word.getStatus()));
     }
@@ -50,5 +52,21 @@ class WordListAdapter extends RecyclerView.Adapter<WordListAdapter.ViewHolder>{
     @Override
     public int getItemCount() {
         return wordList.size();
+    }
+
+    //this handler is used to switch from list view to detailed view
+    private class ItemOnClickListener implements View.OnClickListener{
+        private int position;
+
+        ItemOnClickListener(int p){
+            position = p;
+        }
+
+        @Override
+        public void onClick(View v) {
+            Intent intent = new Intent(context, DetailedViewActivity.class);
+            ApplicationResourceManager.setCurrentPosition(position);
+            context.startActivity(intent);
+        }
     }
 }

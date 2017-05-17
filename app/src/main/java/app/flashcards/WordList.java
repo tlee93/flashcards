@@ -12,13 +12,20 @@ import java.util.List;
 //singleton for global data access
 class WordList {
     private static WordList wordListInstance = new WordList();
-    private ArrayList<Word> wordList;
+    private static ArrayList<Word> wordList;
 
     private WordList(){
-        AssetManager am = new GlobalApplicationContext().getContext().getAssets();
+        //leave empty. only load data when needed
+    }
+
+    static ArrayList<Word> getWordList(){
+        return wordListInstance.wordList;
+    }
+
+    static void loadList(){
         StringBuilder sb = new StringBuilder();
         try {
-            BufferedReader br = new BufferedReader(new InputStreamReader(am.open("ch.json")));
+            BufferedReader br = ApplicationResourceManager.getLanguageResourceFile();
             String line;
             while ((line = br.readLine()) != null){
                 sb.append(line);
@@ -28,7 +35,7 @@ class WordList {
             JSONArray jsa = new JSONObject(sb.toString()).getJSONArray("l"); //start of the list
             int size = jsa.length();
             wordList = new ArrayList<>(size);
-            br = new BufferedReader(new InputStreamReader(am.open("statuslist.dat")));
+            br = ApplicationResourceManager.getLanguageStatusFile();
             for(int i = 0; i < size; i++){
                 JSONObject current = jsa.getJSONObject(i);
                 String ch = current.getString("c"); //get chara/word
@@ -42,9 +49,5 @@ class WordList {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    static ArrayList<Word> getWordList(){
-        return wordListInstance.wordList;
     }
 }
