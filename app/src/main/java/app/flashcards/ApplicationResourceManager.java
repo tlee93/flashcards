@@ -16,17 +16,12 @@ class ApplicationResourceManager {
     private static SharedPreferences sharedPreferences;
     private static SharedPreferences.Editor editor;
     private static AssetManager am;
-    private static Context context;
 
     private ApplicationResourceManager(){
-        Context context = new GlobalApplicationContext().getApplicationContext();
+        Context context = new GlobalApplicationContext().getContext();
         sharedPreferences = context.getSharedPreferences("appSettings", Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
         am = context.getAssets();
-    }
-
-    public static void setContext(Context c){
-        context = c;
     }
 
     public static ApplicationResourceManager getInstance(){
@@ -48,7 +43,7 @@ class ApplicationResourceManager {
 
     //only call getLanguageFiles after language has been set
     public static BufferedReader getLanguageResourceFile(){
-        String filename = getLanguage() + "/wordlist.json";
+        String filename = getLanguage() + "wordlist.json";
         BufferedReader br = null;
         try {
             br = new BufferedReader(new InputStreamReader(am.open(filename)));
@@ -59,7 +54,7 @@ class ApplicationResourceManager {
     }
 
     public static BufferedReader getLanguageStatusFile(){
-        String filename = getLanguage() + "/statuslist.dat";
+        String filename = getLanguage() + "statuslist.dat";
         BufferedReader br = null;
         try {
             br = new BufferedReader(new InputStreamReader(am.open(filename)));
@@ -118,7 +113,7 @@ class ApplicationResourceManager {
         String s = "";
         switch (currentLanguage){
             case "Chinese":
-                word = s.charAt(0) + "";
+                s = word.charAt(0) + "";
                 break;
             case "Korean":
                 s = word;

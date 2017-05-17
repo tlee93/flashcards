@@ -24,10 +24,9 @@ public class FirstTimeUserInitActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        context = getApplicationContext();
-        SharedPreferences sharedPreferences = context.getSharedPreferences("appSettings", Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("appSettings", Context.MODE_PRIVATE);
         sharedPreferences.edit();
-        if(sharedPreferences.contains("currentLanguage")){
+        if(sharedPreferences.getString("currentLanguage", null) == null){
             setContentView(R.layout.first_time_init_layout);
             languageList = (ListView) findViewById(R.id.languagesList);
             languageList.setOnItemClickListener(new LanguageListHandler());
