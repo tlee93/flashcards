@@ -34,9 +34,7 @@ public class FirstTimeUserInitActivity extends AppCompatActivity {
             languageList.setOnItemClickListener(new LanguageListHandler());
             imageButton = (ImageButton) findViewById(R.id.continueButton);
             imageButton.setOnClickListener(new ContinueButtonHandler());
-        }else{
-            startNextActivity();
-        }
+        }else startNextActivity();
     }
 
     private void startNextActivity(){
@@ -78,9 +76,8 @@ public class FirstTimeUserInitActivity extends AppCompatActivity {
         @Override
         public View getView(int position, View convertView, ViewGroup parent){
             String l = getItem(position);
-            if (convertView == null) {
+            if (convertView == null)
                 convertView = LayoutInflater.from(getContext()).inflate(R.layout.language_list_entry_layout, parent, false);
-            }
             TextView languageListTextView = (TextView) convertView.findViewById(R.id.languageListTextView);
             languageListTextView.setText(l);
             return convertView;

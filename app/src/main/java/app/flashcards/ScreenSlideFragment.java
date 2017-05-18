@@ -31,11 +31,18 @@ public class ScreenSlideFragment extends Fragment {
         TextView detailedNumberTextView = (TextView) view.findViewById(R.id.detailedNumberTextView);
         TextView detailedCharacterTextView = (TextView) view.findViewById(R.id.detailedWordTextView);
         TextView detailedDefinitionsTextView = (TextView) view.findViewById(R.id.detailedDefinitionsTextView);
+        ImageView leftArrowImageView = (ImageView) view.findViewById(R.id.leftArrowImageView);
+        ImageView rightArrowImageView = (ImageView) view.findViewById(R.id.rightArrowImageView);
         final ImageView detailedPlaySoundImageView = (ImageView) view.findViewById(R.id.detailedPlaySoundImageView);
 
         detailedNumberTextView.setText(String.valueOf(word.getNumber()));
         detailedCharacterTextView.setText(word.getWord());
         detailedDefinitionsTextView.setText(ApplicationResourceManager.formatDefinitionString(word.getDefinitions()));
+        if(word.getNumber() == 1)
+            leftArrowImageView.setVisibility(View.INVISIBLE);
+        else if(word.getNumber() == WordList.getWordList().size()+1)
+            rightArrowImageView.setVisibility(View.INVISIBLE);
+
         detailedPlaySoundImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

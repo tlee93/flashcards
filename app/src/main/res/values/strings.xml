@@ -5,8 +5,8 @@
     <string name="info_action_title">Info</string>
     <string name="switch_language_action_title">Switch language</string>
 
-    <string name="info_message">Info goes here. TODO</string>
-    <string name="help_message">Help msg goes here. TODO</string>
+    <string name="info_message">This app contains frequency lists for the supported languages. Frequency lists can be an effective way to learn a language. Frequency lists can be more useful for those who already have basic knowledge of a language already (e.g. a native speaker who cannot read or write) but can be used by anyone. The idea behind using frequency lists is the first n number of words you learn will allow you to understand a bigger percentage of all daily used words because they are the most common words (e.g. learning first 100 words might be ~ 40% understanding).\n\n All frequency lists are found publicly online:\nhttp://www.zein.se/patrick/3000en.html \nhttps://www.topikguide.com/download/6000_korean_words.htm\n</string>
+    <string name="help_message">Tap on a word on the main list to go into a detailed view of the word. Swipe left or right to continue navigating through the list. Tap the play icon on the top right to hear the pronounciation of the word (requires Text-to-speech to be set up).</string>
 
-    <string name="init_message">Please choose which langauge you want to learn first</string>
+    <string name="init_message">Please choose which language you want to learn first</string>
 </resources>
