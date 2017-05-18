@@ -3,33 +3,37 @@ package app.flashcards;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.AssetManager;
+import android.speech.tts.TextToSpeech;
+import android.widget.Toast;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 
 class ApplicationResourceManager {
-    //TODO helper functions to help app get correct resources and data depending on the current language: sharedpref reader, data files to read, how to format definitions, tts locality, correct sharedpref data
     private static ApplicationResourceManager instance = new ApplicationResourceManager();
     private static SharedPreferences sharedPreferences;
     private static SharedPreferences.Editor editor;
     private static AssetManager am;
+    private static ArrayList<String> languageList;
+    private static TextToSpeech tts;
+
 
     private ApplicationResourceManager(){
+        String[] languageListArray = {"Chinese", "Korean"};
+        languageList = new ArrayList<>(Arrays.asList(languageListArray));
         Context context = new GlobalApplicationContext().getContext();
         sharedPreferences = context.getSharedPreferences("appSettings", Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
         am = context.getAssets();
     }
 
-    public static ApplicationResourceManager getInstance(){
-        return instance;
-    }
-
-    public static boolean isFirstTimeUser(){
-        return sharedPreferences.contains("currentLanguage");
+    public static ArrayList<String> getLanguageList(){
+        return languageList;
     }
 
     public static void setLanguage(String language){
@@ -84,10 +88,10 @@ class ApplicationResourceManager {
                 locale = Locale.CHINESE;
                 break;
             case "Korean":
-                locale = Locale.KOREA;
+                locale = Locale.KOREAN;
                 break;
             default:
-                locale = Locale.US; //TODO
+                locale = Locale.US;
         }
         return locale;
     }
@@ -123,5 +127,26 @@ class ApplicationResourceManager {
                 break;
         }
         return s;
+    }
+
+    public static void initTTS(final Context context){
+        if(tts != null) tts.shutdown();
+        tts = new TextToSpeech(context, new TextToSpeech.OnInitListener() {
+            @Override
+            public void onInit(int status) {
+                if(status == TextToSpeech.SUCCESS){
+                    //try to set locale
+                    int result = tts.setLanguage(getLocale());
+                    if(result != TextToSpeech.LANG_AVAILABLE)
+                        Toast.makeText(context, "Text-to-speech init fail. This language is not supported.", Toast.LENGTH_SHORT).show();
+                }
+                else //TODO better tts error handling
+                    Toast.makeText(context, "Error. Text-to-speech may be disabled.", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    public static TextToSpeech getTTS(){
+        return tts;
     }
 }

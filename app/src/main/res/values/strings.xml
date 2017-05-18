@@ -1,16 +1,12 @@
 <resources>
     <string name="app_name">Flashcards</string>
 
-    <string name="help_icon_title">Help</string>
-    <string name="info_icon_title">Info</string>
-    <string name="info_reset_title">Clear</string>
+    <string name="help_action_title">Help</string>
+    <string name="info_action_title">Info</string>
+    <string name="switch_language_action_title">Switch language</string>
 
     <string name="info_message">Info goes here. TODO</string>
     <string name="help_message">Help msg goes here. TODO</string>
 
     <string name="init_message">Please choose which langauge you want to learn first</string>
-    <string-array name="language_list">
-        <item>Chinese</item>
-        <item>Korean</item>
-    </string-array>
 </resources>

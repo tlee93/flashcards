@@ -1,12 +1,13 @@
 package app.flashcards;
 
-import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.speech.tts.TextToSpeech;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 
 public class DetailedViewActivity extends FragmentActivity {
     private ViewPager viewPager;
+    private TextToSpeech tts;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

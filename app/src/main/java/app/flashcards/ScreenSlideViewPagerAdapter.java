@@ -1,6 +1,5 @@
 package app.flashcards;
 
-
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -15,7 +14,10 @@ class ScreenSlideViewPagerAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
+        Bundle bundle = new Bundle();
+        bundle.putInt("position", position);
         ScreenSlideFragment ssf = new ScreenSlideFragment();
+        ssf.setArguments(bundle);
         return ssf;
     }
 

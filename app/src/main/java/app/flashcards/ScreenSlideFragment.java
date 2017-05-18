@@ -9,14 +9,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import java.util.List;
-import java.util.Locale;
 
 public class ScreenSlideFragment extends Fragment {
     private Word word;
-    private TextToSpeech tts;
 
     // Required empty public constructor
     public ScreenSlideFragment() {}
@@ -24,21 +19,8 @@ public class ScreenSlideFragment extends Fragment {
     @Override
     public void onCreate (Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        int position = ApplicationResourceManager.getCurrentPosition();
+        int position = getArguments().getInt("position");
         word = WordList.getWordList().get(position);
-        tts = new TextToSpeech(getContext(), new TextToSpeech.OnInitListener() {
-            @Override
-            public void onInit(int status) {
-                if(status == TextToSpeech.SUCCESS){
-                    //try to set locale
-                    int result = tts.setLanguage(ApplicationResourceManager.getLocale());
-                    if(result != TextToSpeech.LANG_AVAILABLE)
-                        Toast.makeText(getContext(), "Language is not supported.", Toast.LENGTH_LONG).show();
-                }
-                else //TODO better tts error handling
-                    Toast.makeText(getContext(), "Error. Text-to-speech may be disabled.", Toast.LENGTH_LONG).show();
-            }
-        });
     }
 
 
@@ -66,10 +48,10 @@ public class ScreenSlideFragment extends Fragment {
     @Override
     public void onDestroy(){
         super.onDestroy();
-        tts.shutdown();
     }
 
     private void speakText(){
+        TextToSpeech tts = ApplicationResourceManager.getTTS();
         String s = ApplicationResourceManager.formatWordDisplayString(word.getWord()); //TODO
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
             tts.speak(s, TextToSpeech.QUEUE_FLUSH, null, null);

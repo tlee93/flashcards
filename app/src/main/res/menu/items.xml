@@ -4,17 +4,17 @@
     <item
         android:id="@+id/action_help"
         android:icon="@drawable/ic_help_outline_black_36dp"
-        android:title="@string/help_icon_title"
+        android:title="@string/help_action_title"
         app:showAsAction="ifRoom"/>
 
     <item
         android:id="@+id/action_info"
         android:icon="@drawable/ic_info_outline_black_36dp"
-        android:title="@string/info_icon_title"
+        android:title="@string/info_action_title"
         app:showAsAction="ifRoom"/>
 
     <item
-        android:id="@+id/action_reset"
-        android:title="@string/info_reset_title"
+        android:id="@+id/action_switch_language"
+        android:title="@string/switch_language_action_title"
         app:showAsAction="never"/>
 </menu>
