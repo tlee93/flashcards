@@ -30,6 +30,7 @@ class ApplicationResourceManager {
         sharedPreferences = context.getSharedPreferences("appSettings", Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
         am = context.getAssets();
+        editor.apply();
     }
 
     public static ArrayList<String> getLanguageList(){
