@@ -7,7 +7,7 @@ detailed view for words
 supported languages: chinese  
 add text-to-speech  
 
-#screenshots
+# screenshots
 ![Screenshot](screenshots/1.png?raw=true)  
 ![Screenshot](screenshots/2.png?raw=true)  
 ![Screenshot](screenshots/3.png?raw=true)  
