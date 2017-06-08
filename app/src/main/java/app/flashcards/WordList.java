@@ -11,9 +11,7 @@ class WordList {
     private static WordList wordListInstance = new WordList();
     private static ArrayList<Word> wordList;
 
-    private WordList(){
-        //leave empty. only load data when needed
-    }
+    private WordList(){}
 
     static ArrayList<Word> getWordList(){
         return wordListInstance.wordList;

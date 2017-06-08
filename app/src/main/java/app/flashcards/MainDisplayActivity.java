@@ -11,7 +11,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class MainDisplayActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
@@ -20,7 +19,6 @@ public class MainDisplayActivity extends AppCompatActivity {
     private void initActivity(){
         ApplicationResourceManager.initTTS(this);
         setContentView(R.layout.activity_main_display);
-
         ArrayList<Word> wordList = WordList.getWordList();
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("Flashcards/" + ApplicationResourceManager.getLanguage());
@@ -99,10 +97,19 @@ public class MainDisplayActivity extends AppCompatActivity {
     }
 
     private class MainDisplayScrollListener extends RecyclerView.OnScrollListener {
-
+        int actionBarHeight = R.attr.actionBarSize;
         @Override
         public void onScrolled(RecyclerView recyclerView, int dx, int dy){
-            ApplicationResourceManager.setCurrentPosition(layoutManager.findFirstVisibleItemPosition());
+            if(dy > actionBarHeight)
+                getActionBar().hide();
+            else if(dy < actionBarHeight * -1)
+                getActionBar().show();
+        }
+
+        @Override
+        public void onScrollStateChanged(RecyclerView recyclerView, int newState){
+            if (newState == RecyclerView.SCROLL_STATE_IDLE)
+                ApplicationResourceManager.setCurrentPosition(layoutManager.findFirstVisibleItemPosition());
         }
     }
 }

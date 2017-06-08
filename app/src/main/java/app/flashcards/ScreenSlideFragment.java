@@ -52,11 +52,6 @@ public class ScreenSlideFragment extends Fragment {
         return view;
     }
 
-    @Override
-    public void onDestroy(){
-        super.onDestroy();
-    }
-
     private void speakText(){
         TextToSpeech tts = ApplicationResourceManager.getTTS();
         String s = ApplicationResourceManager.formatWordDisplayString(word.getWord()); //TODO
