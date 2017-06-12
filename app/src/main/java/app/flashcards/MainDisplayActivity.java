@@ -1,6 +1,8 @@
 package app.flashcards;
 
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.res.TypedArray;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -15,12 +17,14 @@ import java.util.ArrayList;
 public class MainDisplayActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private LinearLayoutManager layoutManager;
+    private int actionBarHeight;
+    private Toolbar toolbar;
 
     private void initActivity(){
         ApplicationResourceManager.initTTS(this);
         setContentView(R.layout.activity_main_display);
         ArrayList<Word> wordList = WordList.getWordList();
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("Flashcards/" + ApplicationResourceManager.getLanguage());
         setSupportActionBar(toolbar);
         recyclerView = (RecyclerView) findViewById(R.id.wordRecycleListView);
@@ -31,18 +35,32 @@ public class MainDisplayActivity extends AppCompatActivity {
         recyclerView.setAdapter(wordListAdapter);
         recyclerView.addOnScrollListener(new MainDisplayScrollListener());
         recyclerView.scrollToPosition(ApplicationResourceManager.getCurrentPosition());
+        //get the action bar height
+        TypedArray tv = getApplicationContext().getTheme().obtainStyledAttributes(new int[] { android.R.attr.actionBarSize });
+        actionBarHeight = (int) tv.getDimension(0, 0) + 10;
+        tv.recycle();
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         initActivity();
+        if(ApplicationResourceManager.isCurrentlyDetailedViewMode()){
+            Intent intent = new Intent(getApplicationContext(), DetailedViewActivity.class);
+            startActivity(intent);
+        }
     }
 
     @Override
     protected void onResume(){
         super.onResume();
         recyclerView.scrollToPosition(ApplicationResourceManager.getCurrentPosition());
+    }
+
+    @Override
+    protected void onDestroy(){
+        super.onDestroy();
+        ApplicationResourceManager.closeTTS();
     }
 
     @Override
@@ -97,13 +115,17 @@ public class MainDisplayActivity extends AppCompatActivity {
     }
 
     private class MainDisplayScrollListener extends RecyclerView.OnScrollListener {
-        int actionBarHeight = R.attr.actionBarSize;
+        private int actionBarOffset = 0;
         @Override
         public void onScrolled(RecyclerView recyclerView, int dx, int dy){
-            if(dy > actionBarHeight)
-                getActionBar().hide();
-            else if(dy < actionBarHeight * -1)
-                getActionBar().show();
+            super.onScrolled(recyclerView, dx, dy);
+            if(actionBarOffset > actionBarHeight)
+                actionBarOffset = actionBarHeight;
+            else if(actionBarOffset < 0)
+                actionBarOffset = 0;
+            toolbar.setTranslationY(-actionBarOffset);
+            if((actionBarOffset < actionBarHeight && dy>0) || (actionBarOffset > 0 && dy<0))
+                actionBarOffset += dy;
         }
 
         @Override

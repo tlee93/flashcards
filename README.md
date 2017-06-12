@@ -4,7 +4,7 @@ language vocabulary flashcards on android
 # features
 list of words sorted by frequency  
 card view for words  
-supported languages: chinese korean 
+supported languages: chinese korean  
 text-to-speech  
 
 # screenshots

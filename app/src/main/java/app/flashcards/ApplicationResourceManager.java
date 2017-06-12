@@ -21,15 +21,17 @@ class ApplicationResourceManager {
     private static AssetManager am;
     private static ArrayList<String> languageList;
     private static TextToSpeech tts;
+    private static String currentLanguage;
 
 
     private ApplicationResourceManager(){
-        String[] languageListArray = {"Chinese", "Korean"};
+        String[] languageListArray = {"Chinese", "Korean"}; //this contains the list of languages supported. add to this list
         languageList = new ArrayList<>(Arrays.asList(languageListArray));
         Context context = new GlobalApplicationContext().getContext();
         sharedPreferences = context.getSharedPreferences("appSettings", Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
         am = context.getAssets();
+        currentLanguage = sharedPreferences.getString("currentLanguage", null);
         editor.apply();
     }
 
@@ -38,12 +40,13 @@ class ApplicationResourceManager {
     }
 
     public static void setLanguage(String language){
+        currentLanguage = language;
         editor.putString("currentLanguage", language);
         editor.commit();
     }
 
     public static String getLanguage(){
-        return sharedPreferences.getString("currentLanguage", null);
+        return currentLanguage;
     }
 
     //only call getLanguageFiles after language has been set
@@ -59,7 +62,7 @@ class ApplicationResourceManager {
     }
 
     public static BufferedReader getLanguageStatusFile(){
-        String filename = getLanguage() + "statuslist.dat";
+        String filename = getLanguage() + "statuslist.dat"; //TODO consider using db
         BufferedReader br = null;
         try {
             br = new BufferedReader(new InputStreamReader(am.open(filename)));
@@ -70,19 +73,25 @@ class ApplicationResourceManager {
     }
 
     public static int getCurrentPosition(){
-        String currentLanguage = sharedPreferences.getString("currentLanguage", null);
         return sharedPreferences.getInt("currentPosition" + currentLanguage, 0);
     }
 
     public static void setCurrentPosition(int position){
-        String currentLanguage = sharedPreferences.getString("currentLanguage", null);
         editor.putInt("currentPosition" + currentLanguage, position);
+        editor.apply();
+    }
+
+    public static boolean isCurrentlyDetailedViewMode(){
+        return sharedPreferences.getBoolean("isCurrentlyDetailedViewMode", false);
+    }
+
+    public static void setIsCurrentlyDetailedViewMode(boolean mode){
+        editor.putBoolean("isCurrentlyDetailedViewMode", mode);
         editor.apply();
     }
 
     //chooses the correct locale to use
     public static Locale getLocale(){
-        String currentLanguage = sharedPreferences.getString("currentLanguage", null);
         Locale locale = null;
         switch (currentLanguage){
             case "Chinese":
@@ -99,7 +108,6 @@ class ApplicationResourceManager {
 
     //formats the way definitions get displayed depending on the current language
     public static String formatDefinitionString(List<String> definitionList){
-        String currentLanguage = sharedPreferences.getString("currentLanguage", null);
         String s = "";
         switch (currentLanguage){
             case "Chinese":
@@ -114,7 +122,6 @@ class ApplicationResourceManager {
 
     //formats the way the word(s) get displayed depending on the current language
     public static String formatWordDisplayString(String word){
-        String currentLanguage = sharedPreferences.getString("currentLanguage", null);
         String s = "";
         switch (currentLanguage){
             case "Chinese":
@@ -132,7 +139,7 @@ class ApplicationResourceManager {
 
     public static void initTTS(final Context context){
         if(tts != null) tts.shutdown();
-        tts = new TextToSpeech(context, new TextToSpeech.OnInitListener() {
+        else tts = new TextToSpeech(context, new TextToSpeech.OnInitListener() {
             @Override
             public void onInit(int status) {
                 if(status == TextToSpeech.SUCCESS){
@@ -149,5 +156,9 @@ class ApplicationResourceManager {
 
     public static TextToSpeech getTTS(){
         return tts;
+    }
+
+    public static void closeTTS(){
+        if(tts != null) tts.shutdown();
     }
 }
