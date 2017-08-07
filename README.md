@@ -16,5 +16,4 @@ text-to-speech
 
 # to do list
 more language support  
-vocab test feature  
-
+vocab test feature
